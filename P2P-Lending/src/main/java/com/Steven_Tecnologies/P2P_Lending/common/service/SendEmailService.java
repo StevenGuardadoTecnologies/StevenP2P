@@ -1,7 +1,9 @@
 package com.Steven_Tecnologies.P2P_Lending.common.service;
 
-
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -9,20 +11,27 @@ import org.springframework.stereotype.Service;
 @Log4j2
 public class SendEmailService {
 
+    private final JavaMailSender mailSender;
 
+    @Value("${spring.mail.username}")
     private String defaultFrom;
 
-    private String defaultTo;
+    public SendEmailService(@Qualifier("testSender") JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
-    private String defaultCc;
+    public void sendEmail(String to, String subject, String body) {
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(defaultFrom);
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(body);
 
-    private String defaultBcc;
-
-    private String subject;
-
-    private String body;
-
-    private JavaMailSender mailSender;
-
-
+            mailSender.send(message);
+            log.info("Email inviata con successo a {}", to);
+        } catch (Exception e) {
+            log.error("Errore durante l'invio dell'email a {}: {}", to, e.getMessage(), e);
+        }
+    }
 }
