@@ -12,7 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 @Getter
 @Configuration
 @ConfigurationProperties(prefix = "pgp")
-@PropertySource("file:cfg/pgp.properties")
+//@PropertySource("file:cfg/pgp.properties")
 public class PGPConfigProperties {
 
     @Value("")

@@ -15,6 +15,7 @@ import java.time.LocalDate;
         @UniqueConstraint(columnNames = "email"),
         @UniqueConstraint(columnNames = "phoneNumber")
 })
+@Entity
 public class User extends  identifiableEntity{
 
     private String fullName;

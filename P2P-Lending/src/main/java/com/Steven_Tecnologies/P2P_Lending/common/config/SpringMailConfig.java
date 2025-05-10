@@ -12,29 +12,26 @@ import java.util.Properties;
 public class SpringMailConfig {
 
     @Bean
-    public JavaMailSender testSender( @Value("") String host,
-                                      @Value("") int port,
-                                      @Value("") String username,
-                                      @Value("") String password){
+    public JavaMailSender testSender(
+            @Value("${spring.mail.host}") String host,
+            @Value("${spring.mail.port}") int port,
+            @Value("${spring.mail.username}") String username,
+            @Value("${spring.mail.password}") String password) {
 
         return createMailSender(host, port, username, password);
-
     }
 
+    @Bean
     public JavaMailSender prodSender(
-            @Value("") String host,
-            @Value("") int port,
-            @Value("") String username,
-            @Value("") String password
-    ){
+            @Value("${spring.mail.host}") String host,
+            @Value("${spring.mail.port}") int port,
+            @Value("${spring.mail.username}") String username,
+            @Value("${spring.mail.password}") String password) {
 
         return createMailSender(host, port, username, password);
-
-
     }
 
-
-    private JavaMailSender createMailSender(String host, int port, String username, String password){
+    private JavaMailSender createMailSender(String host, int port, String username, String password) {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
         mailSender.setPort(port);
@@ -42,9 +39,8 @@ public class SpringMailConfig {
         mailSender.setPassword(password);
 
         Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.smtp.auth", "false");
-        props.put("mail.smtp.starttls.enable", "false");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
         return mailSender;
-
     }
 }

@@ -1,10 +1,8 @@
 package com.Steven_Tecnologies.P2P_Lending.api.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
+@Entity
 public class UserDetails  extends  identifiableEntity{
 
 

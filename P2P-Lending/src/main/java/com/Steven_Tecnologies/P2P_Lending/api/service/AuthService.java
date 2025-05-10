@@ -41,7 +41,7 @@ public class AuthService {
             if (userRepository.existsByEmail(dto.getEmail())) {
                 throw new IllegalArgumentException("Email already exists");
             }
-            if (userRepository.existByphoneNumber((dto.getPhoneNumber()))) {
+            if (userRepository.existsByphoneNumber((dto.getPhoneNumber()))) {
 
                 throw new IllegalArgumentException("Phone number already exists");
             }
