@@ -11,12 +11,14 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user", uniqueConstraints = {
+@Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email"),
         @UniqueConstraint(columnNames = "phoneNumber")
 })
 @Entity
 public class User extends  identifiableEntity{
+
+
 
     private String fullName;
 
